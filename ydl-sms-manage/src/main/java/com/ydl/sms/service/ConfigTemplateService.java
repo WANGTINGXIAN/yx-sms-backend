@@ -7,7 +7,7 @@ import com.ydl.sms.entity.ConfigTemplateEntity;
 /**
  * 配置—模板表
  *
- * @author IT李老师
+ * @author wtx
  *
  */
 public interface ConfigTemplateService extends IService<ConfigTemplateEntity> {

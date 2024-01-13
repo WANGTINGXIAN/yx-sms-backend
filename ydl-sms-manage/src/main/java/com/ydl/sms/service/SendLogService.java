@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 日志表
  *
- * @author IT李老师
+ * @author wtx
  *
  */
 public interface SendLogService extends IService<SendLogEntity> {

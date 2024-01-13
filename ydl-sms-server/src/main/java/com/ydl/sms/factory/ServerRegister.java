@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +36,7 @@ public class ServerRegister implements CommandLineRunner {
     public void run(String... args) {
         //TODO 服务注册器，项目启动时将当前服务id注册到Redis中，使用Redis的Hash结构，key为SERVER_ID_HASH，Hash结构的key为服务id，value为时间戳
         // SERVER_ID_HASH   key  value
-        SERVER_ID = UUID.randomUUID().toString(); //当前实例key
+        SERVER_ID = UUID.randomUUID().toString();//当前实例key
         log.info("server实例启动，生成的id:{}", SERVER_ID);
         redisTemplate.opsForHash().put("SERVER_ID_HASH", SERVER_ID, System.currentTimeMillis());
     }

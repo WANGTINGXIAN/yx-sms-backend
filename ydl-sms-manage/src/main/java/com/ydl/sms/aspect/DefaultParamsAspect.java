@@ -24,7 +24,6 @@ public class DefaultParamsAspect {
 
         // TODO 自动注入基础属性（创建者、创建时间、修改者、修改时间）
         System.out.println("走到切面方法中！");
-
         //1通过方法参数实体类 有没有id来判断 是新增还是修改
         //threadlocal  中获取userId
         Long userId = BaseContextHandler.getUserId();
@@ -36,7 +35,6 @@ public class DefaultParamsAspect {
             Object id = null;
             if (method != null) {
                 id = method.invoke(arg);
-
             }
             //1.1 新增 创建人 创建时间 修改人 修改时间
             if (id == null) {
@@ -71,7 +69,7 @@ public class DefaultParamsAspect {
      * @param types   参数类型
      * @return
      */
-    private Method  getMethod(Class classes, String name, Class... types) {
+    private Method getMethod(Class classes, String name, Class... types) {
         try {
             return classes.getMethod(name, types);
         } catch (NoSuchMethodException e) {

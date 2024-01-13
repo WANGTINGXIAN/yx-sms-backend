@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 黑名单
  *
- * @author IT李老师
+ * @author wtx
  *
  */
 public interface BlackListService extends IService<BlackListEntity> {

@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * 通道配置
  *
- * @author IT李老师
+ * @author wtx
  *
  */
 @Service

@@ -8,7 +8,7 @@ import lombok.Data;
 /**
  * 配置—签名表
  *
- * @author IT李老师
+ * @author wtx
  *
  */
 @Data

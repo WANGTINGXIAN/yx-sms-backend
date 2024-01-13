@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 平台
  *
- * @author IT李老师
+ * @author wtx
  *
  */
 @Service

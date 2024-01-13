@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * 定时发送
  *
- * @author IT李老师
+ * @author wtx
  *
  */
 @Service

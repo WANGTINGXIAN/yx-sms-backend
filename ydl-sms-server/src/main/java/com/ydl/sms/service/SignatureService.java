@@ -6,7 +6,7 @@ import com.ydl.sms.entity.SignatureEntity;
 /**
  * 签名表
  *
- * @author IT李老师
+ * @author wtx
  *
  */
 public interface SignatureService extends IService<SignatureEntity> {

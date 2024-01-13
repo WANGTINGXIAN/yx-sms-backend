@@ -52,10 +52,8 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, ConfigEntity> i
         //1 获取存活发送端
         Map map = redisTemplate.opsForHash().entries("SERVER_ID_HASH");
         log.info("全部发送端有："+map);
-
         //获取当前时间
         long currentTimeMillis = System.currentTimeMillis();
-
         for (Object key : map.keySet()) {
             Object value = map.get(key);
             long lastTiem = Long.parseLong(value.toString());
@@ -63,11 +61,9 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, ConfigEntity> i
             if(currentTimeMillis-lastTiem<(1000*60*5)){
                 //2 删除已经redis缓存的通道优先级
                 redisTemplate.delete("listForConnect");
-
                 //3通知 优先级变了
                 ServerTopic serverTopic = ServerTopic.builder().option(ServerTopic.INIT_CONNECT).value(key.toString()).build();
                 redisTemplate.convertAndSend("TOPIC_HIGH_SERVER",serverTopic.toString());
-
                 return;
             }
         }

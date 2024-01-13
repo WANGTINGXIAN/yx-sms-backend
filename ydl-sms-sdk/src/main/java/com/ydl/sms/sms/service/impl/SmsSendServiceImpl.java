@@ -77,7 +77,7 @@ public class SmsSendServiceImpl implements SmsSendService {
             }
         }
 
-        baseParamsDTO.setTimestamp(System.currentTimeMillis() + "");
+        baseParamsDTO.setTimestamp(System.currentTimeMillis() + "");//long-string
         baseParamsDTO.setEncryption(SmsEncryptionUtils.encode(baseParamsDTO.getTimestamp(), baseParamsDTO.getAccessKeyId(), accessKeySecret));
 
         if (StringUtils.isBlank(domain)) {

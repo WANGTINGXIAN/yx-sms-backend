@@ -41,7 +41,7 @@ import java.util.List;
  * <p>
  * 一个服务如何配置多数据源？
  * <p>
- * 1. 本类中的 basePackages = {"com.ydl.pinda"}, 修改为  basePackages = {"com.ydl.pinda.product.dao"}  # 这个路径根据你的情况修改
+ * 1. 本类中的 basePackages = {"com.ydl.sms"}, 修改为  basePackages = {"com.ydl.sms.product.dao"}  # 这个路径根据你的情况修改
  * 2. 修改本类中的 @ConfigurationProperties(prefix = "spring.datasource.druid") 为 @ConfigurationProperties(prefix = "spring.datasource.druid.master")
  * <p>
  * 3. 复制该类 重命名为 SlaveDatabaseAutoConfiguration

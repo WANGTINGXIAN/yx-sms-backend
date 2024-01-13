@@ -1,24 +1,14 @@
 package com.ydl.sms.sms;
 
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.aliyun.dysmsapi20170525.Client;
-
-import com.netflix.client.ClientException;
+import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
+import com.aliyun.teaopenapi.models.Config;
 import com.ydl.sms.entity.SignatureEntity;
 import com.ydl.sms.entity.SmsConfig;
-import com.ydl.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
-import com.aliyun.tea.*;
-import com.aliyun.dysmsapi20170525.*;
-import com.aliyun.dysmsapi20170525.models.*;
-import com.aliyun.teaopenapi.*;
-import com.aliyun.teaopenapi.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.rmi.ServerException;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -31,8 +21,9 @@ import java.util.Map;
 public class AliyunSmsService extends AbstractSmsService {
 
     //private IClientProfile profile;
-    Config aliconfig;
 
+    Config aliconfig;
+    @Autowired
     public AliyunSmsService(SmsConfig config) {
         this.config = config;
         //初始化
@@ -42,29 +33,30 @@ public class AliyunSmsService extends AbstractSmsService {
     private void init() {
         //初始化acsClient，暂不支持region化 "cn-hangzhou"
         //profile = DefaultProfile.getProfile(config.get("RegionId"), config.getAccessKeyId(), config.getAccessKeySecret());
-        aliconfig = new Config()
-                // 您的AccessKey ID
+//        Config aliconfig = new com.aliyun.teaopenapi.models.Config()
+        aliconfig = new com.aliyun.teaopenapi.models.Config()
                 .setAccessKeyId(config.getAccessKeyId())
-                // 您的AccessKey Secret
                 .setAccessKeySecret( config.getAccessKeySecret());
         // 访问的域名
         aliconfig.endpoint = "dysmsapi.aliyuncs.com";
+//        return new Client(aliconfig);
+
     }
 
     @Override
     protected String sendSms(String mobile, Map<String, String> params, String signature, String template) {
         // 获取 签名内容 和模板id
         SignatureEntity signatureEntity = signatureService.getByCode(signature);
-        String code = templateService.getConfigCodeByCode(config.getId(), template);
+        String code = "SMS_460690520";
+//                templateService.getConfigCodeByCode(config.getId(), template);
         try {
-            Client client = new Client(aliconfig);
-
-            SendSmsRequest request=new SendSmsRequest();
+            com.aliyun.dysmsapi20170525.Client client = new com.aliyun.dysmsapi20170525.Client(aliconfig);
+            com.aliyun.dysmsapi20170525.models.SendSmsRequest request = new com.aliyun.dysmsapi20170525.models.SendSmsRequest();
             request.setPhoneNumbers(mobile);
             request.setTemplateCode(code);
             request.setTemplateParam(JSON.toJSONString(params));
-            request.setSignName(signatureEntity.getContent());
-
+            request.setSignName(signatureEntity.getName());
+            com.aliyun.teautil.models.RuntimeOptions runtime = new com.aliyun.teautil.models.RuntimeOptions();
             SendSmsResponse response = client.sendSms(request);
             JSONObject jsonObject = JSON.parseObject(String.valueOf(response.getBody()));
             if (response.getBody().getCode().equals("OK")) {
@@ -78,7 +70,6 @@ public class AliyunSmsService extends AbstractSmsService {
         }
         //"{\"Message\":\"OK\",\"RequestId\":\"" + UUID.randomUUID().toString().toUpperCase() + "-@\",\"BizId\":\"" + System.currentTimeMillis() + "\",\"Code\":\"OK\"}";
     }
-
 
     //https://help.aliyun.com/document_detail/55284.html?spm=5176.8195934.1284193.3.65f76a7di5WyeP
     //@Override

@@ -6,7 +6,7 @@ import com.ydl.sms.entity.PlatformEntity;
 /**
  * 平台表
  *
- * @author IT李老师
+ * @author wtx
  *
  */
 public interface PlatformService extends IService<PlatformEntity> {

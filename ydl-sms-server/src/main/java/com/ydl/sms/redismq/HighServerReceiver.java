@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class HighServerReceiver implements MessageListener {
+public class    HighServerReceiver implements MessageListener {
 
     @Autowired
     private RedisTemplate redisTemplate;

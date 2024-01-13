@@ -8,8 +8,6 @@ import com.ydl.sms.model.ServerTopic;
 import com.ydl.sms.service.ConfigService;
 import com.ydl.sms.service.SignatureService;
 import com.ydl.sms.service.TemplateService;
-import com.ydl.sms.service.impl.SignatureServiceImpl;
-import com.ydl.sms.service.impl.TemplateServiceImpl;
 import com.ydl.utils.SpringUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -127,11 +125,11 @@ public class SmsConnectLoader implements CommandLineRunner {
     }
 
     public <T> T getConnectByLevel(Integer level) {
-        return (T) CONNECT_LIST.get(level - 1);
+        return (T) CONNECT_LIST.get(level-1);
     }
 
     public boolean checkConnectLevel(Integer level) {
-        return CONNECT_LIST.size() <= level;
+        return CONNECT_LIST.size() < level;
     }
 
     /**
